@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>TwilioSheet: Twilio SMS to Google Spreadsheet</title>
+    <title>VoxeoSheet: Voxeo SMS to Google Spreadsheet</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -39,7 +39,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">TwilioSheet</a>
+          <a class="brand" href="/">VoxeoSheet</a>
           <div class="nav-collapse">
             <ul class="nav">
               <li class="active"><a href="#">Setup</a></li>
@@ -67,8 +67,8 @@
       </div>
       
       {% if state == 'nothing-submitted' %}
-	<h1>Receive Twilio SMS messages in a Google Spreadsheet</h1>
-	<p>Use Twilio and Google Spreadsheets to build your own
+	<h1>Receive Voxeo SMS messages in a Google Spreadsheet</h1>
+	<p>Use Voxeo and Google Spreadsheets to build your own
 	applications to do SMS polling, SMS voting, keyword marketing,
 	expense tracking, time tracking, and more.</p>
       <p>Need help? <a href="https://github.com/jpf/TwilioSheet/blob/master/README.md">See here for instructions</a></p>
@@ -79,7 +79,7 @@
       {% elif state == 'valid-submission' %}
       <h2>It worked!</h2>
       <p>You're almost done.</p>
-      <p>Follow the steps below and when your Twilio number is sent an SMS, 
+      <p>Follow the steps below and when your Voxeo number is sent an SMS, 
          your spreadsheet will be updated with the following information:</p>
       <ul>
       {% for parameter in parameters_found %}
@@ -87,7 +87,7 @@
       {% endfor %}
       </ul>
       
-      Use this URL as the "SMS Request URL" for your Twilio number:<br/> <input type="text" class="span8" value="{{sms_request_url}}" />
+      Use this URL as the "SMS Request URL" for your Voxeo number:<br/> <input type="text" class="span8" value="{{sms_request_url}}" />
     {% endif %}
     </div> <!-- /container -->
 

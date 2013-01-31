@@ -6,12 +6,11 @@ app = Flask(__name__)
 # app.config['DEBUG'] = True
 
 # TO DO:
-#   Given a public URL, give a Twilio URL
+#   Given a public URL, give a Voxeo URL
 #   SentFromIP:     IP address that sent the request to this script
 
-twilio_parameters = set(['SmsSid', 'AccountSid', 'From', 'To', 'Body',
-                         'FromCity', 'FromState', 'FromZip', 'FromCountry',
-                         'ToCity', 'ToState', 'ToZip', 'ToCountry'])
+voxeo_parameters = set(['botkey', 'apimethod', 'userkey', 'msg', 'user',
+                         'network', 'from'])
 
 
 class NoURLException(Exception):
@@ -34,7 +33,7 @@ class GoogleFormDoesntExistException(Exception):
     pass
 
 
-class NoTwilioParametersInFormException(Exception):
+class NoVoxeoParametersInFormException(Exception):
     pass
 
 
@@ -64,11 +63,11 @@ class TestURL:
             message = "Error form at URL, " \
                       "does the URL exist and point to a form?"
             raise GoogleFormDoesntExistException(message)
-        intersection = twilio_parameters.intersection(gform.labels)
+        intersection = voxeo_parameters.intersection(gform.labels)
         if intersection == set():
             message = "Form at URL must contain at least " \
-                      "one input with a label that matches a Twilio parameter."
-            raise NoTwilioParametersInFormException(message)
+                      "one input with a label that matches a Voxeo parameter."
+            raise NoVoxeoParametersInFormException(message)
         self.parameters = intersection
 
 
@@ -112,16 +111,16 @@ def submit():
                   "looks like a valid URL for a Google Form, " \
                   "I'm just having trouble validating it. " \
                   "Perhaps you entered the URL for an example form?"
-    except NoTwilioParametersInFormException:
+    except NoVoxeoParametersInFormException:
         message = "The URL you entered looks like a valid Google Form, " \
-                  "but it doesn't have any inputs for Twilio data. " \
-                  "Update your form to accept at least one Twilio parameter " \
+                  "but it doesn't have any inputs for Voxeo data. " \
+                  "Update your form to accept at least one Voxeo parameter " \
                   "and try again."
     except:
         message = "Well, this is embarassing, something went wrong. " \
                   "Perhaps you can try again?"
     if valid:
-        # Generate the URL that they need to paste on Twilio
+        # Generate the URL that they need to paste on Voxeo
         return render_template('base.html',
                                message=message,
                                state="valid-submission",
